@@ -1,16 +1,28 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Динар Абдрафиков | Срочный выкуп квартир в Челябинске</title>
-    <meta name="description" content="Частный риелтор Динар Абдрафиков. Срочный выкуп квартир и комнат в Челябинске в любом состоянии (с обременением, арестом, долгами). Помощь с ипотекой. Быстро и дорого!">
+    <title>Динар Абдрафиков | Срочный выкуп квартир в&nbsp;Челябинске</title>
+    <meta name="description" content="Частный риелтор Динар Абдрафиков. Срочный выкуп квартир и&nbsp;комнат в&nbsp;Челябинске в&nbsp;любом состоянии (с обременением, арестом, долгами). Помощь с&nbsp;ипотекой. Быстро и&nbsp;дорого!">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
+        :root, :root[data-theme="light"] {
+            --bg-color: #F8F9FA;
+            --surface-color: #FFFFFF;
+            --surface-light: #E9ECEF;
+            --accent: #FFB800;
+            --accent-hover: #E5A600;
+            --text-main: #2B2D42;
+            --text-muted: #6C757D;
+            --radius: 12px;
+            --transition: all 0.3s ease;
+            --shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        :root[data-theme="dark"] {
             --bg-color: #0d0d0d;
             --surface-color: #1a1a1a;
             --surface-light: #262626;
@@ -18,8 +30,7 @@
             --accent-hover: #E5A600;
             --text-main: #FFFFFF;
             --text-muted: #A0A0A0;
-            --radius: 12px;
-            --transition: all 0.3s ease;
+            --shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -48,7 +59,7 @@
             width: 100%;
             top: 0; left: 0;
             z-index: 100;
-            background: rgba(13, 13, 13, 0.9);
+            background: var(--surface-color); opacity: 0.95;
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255,255,255,0.05);
             padding: 15px 0;
@@ -118,6 +129,170 @@
         .header-btn:hover {
             background: var(--accent-hover);
             transform: translateY(-2px);
+        }
+
+        
+        /* Zero Horizontal Overflow */
+        html, body {
+            max-width: 100vw;
+            overflow-x: hidden !important;
+        }
+        img, svg, video, iframe {
+            max-width: 100%;
+        }
+
+        /* Focus Visible */
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 15px;
+            transition: var(--transition);
+            animation: themeToggleWink 4s infinite;
+        }
+        @keyframes themeToggleWink {
+            0%, 90%, 100% { transform: scale(1) rotate(0); }
+            95% { transform: scale(1.2) rotate(15deg); }
+        }
+
+        /* Mobile Menu Drawer */
+        .mobile-drawer {
+            position: fixed;
+            top: 0; right: 0; width: 300px; height: 100vh;
+            background: var(--surface-color);
+            z-index: 1001;
+            transform: translateX(100%);
+            transition: transform 0.4s ease;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.1);
+            padding: 80px 30px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .mobile-drawer.open { transform: translateX(0); }
+        .drawer-close {
+            position: absolute;
+            top: 25px; right: 25px;
+            font-size: 24px;
+            background: none; border: none;
+            color: var(--text-main); cursor: pointer;
+        }
+        .drawer-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            opacity: 0; visibility: hidden;
+            transition: var(--transition);
+        }
+        .drawer-overlay.open { opacity: 1; visibility: visible; }
+        
+        .hamburger {
+            display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-main);
+        }
+
+        /* Header Alignment */
+        .header-actions { display: flex; align-items: center; }
+        @media (max-width: 1150px) {
+            .nav-links { display: none !important; }
+            .header-btn { display: none; }
+            .hamburger { display: block; margin-left: 15px; }
+            .logo, .theme-toggle, .hamburger { white-space: nowrap; flex-shrink: 0; }
+        }
+
+        /* Grid Safety Updates */
+        @media (max-width: 576px) {
+            .services-grid { grid-template-columns: 1fr !important; }
+            .stats-grid { grid-template-columns: 1fr !important; }
+            .hero-grid { grid-template-columns: 1fr !important; }
+            .contact-grid { grid-template-columns: 1fr !important; }
+        }
+
+        /* Scroll Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Modals */
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+        .modal.open { opacity: 1; visibility: visible; }
+        .modal-content {
+            background: var(--surface-color);
+            padding: 40px;
+            border-radius: var(--radius);
+            width: 90%; max-width: 500px;
+            position: relative;
+            transform: scale(0.9);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        .modal.open .modal-content { transform: scale(1); }
+        .modal-close {
+            position: absolute; top: 20px; right: 20px;
+            font-size: 24px; color: var(--text-muted);
+            background: none; border: none; cursor: pointer;
+        }
+        
+        /* Chat Box overrides */
+        .chat-box {
+            position: fixed;
+            bottom: 100px; right: 30px;
+            width: 350px;
+            background: var(--surface-color);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            z-index: 999;
+            opacity: 0; visibility: hidden;
+            transform: translateY(20px);
+            transition: var(--transition);
+            overflow: hidden;
+            display: flex; flex-direction: column;
+            border: 1px solid rgba(128,128,128,0.2);
+        }
+        @media (max-width: 480px) {
+            .chat-box { width: calc(100vw - 32px); right: 16px; bottom: 90px; }
+        }
+        .chat-box.open { opacity: 1; visibility: visible; transform: translateY(0); }
+        .chat-header {
+            background: var(--accent); color: #000; padding: 20px;
+            display: flex; justify-content: space-between; align-items: center; font-weight: bold;
+        }
+        .chat-body { padding: 20px; height: 250px; overflow-y: auto; background: var(--bg-color); }
+        .chat-msg { background: var(--surface-color); color: var(--text-main); padding: 12px; border-radius: 12px; margin-bottom: 10px; width: 80%; border: 1px solid rgba(128,128,128,0.2); }
+        .chat-footer { padding: 15px; display: flex; gap: 10px; background: var(--surface-color); border-top: 1px solid rgba(128,128,128,0.2); }
+        .chat-input { flex: 1; padding: 10px; border: 1px solid var(--text-muted); border-radius: 20px; font-family: inherit; background: var(--bg-color); color: var(--text-main); }
+        .chat-send { background: var(--accent); color: #000; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; }
+        
+        /* Ken Burns Effect */
+        .hero-bg {
+            animation: kenBurns 20s ease-in-out infinite alternate;
+        }
+        @keyframes kenBurns {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
         }
 
         /* Hero */
@@ -615,7 +790,7 @@
     <!-- Header -->
     <header id="header">
         <div class="container header-inner">
-            <a href="#" class="logo">
+            <a href="#" class="logo" aria-label="На главную">
                 <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
                 <div class="logo-text">
                     Галерея Недвижимости
@@ -629,14 +804,18 @@
                 <a href="#contacts">Контакты</a>
             </nav>
 
-            <a href="#contacts" class="header-btn">Онлайн-оценка</a>
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Переключить тему"><i class="fa-solid fa-moon"></i></button>
+                <a href="#contacts" class="header-btn">Онлайн-оценка</a>
+                <button class="hamburger" id="hamburgerBtn" aria-label="Открыть меню"><i class="fa-solid fa-bars"></i></button>
+            </div>
         </div>
     </header>
 
     <!-- Hero -->
     <section class="hero">
         <div class="hero-bg"></div>
-        <div class="container hero-grid">
+        <div class="container hero-grid fade-in-up">
             <div class="hero-text">
                 <div class="hero-tags">
                     <span class="tag">Срочный выкуп</span>
@@ -644,7 +823,7 @@
                     <span class="tag">Дорого</span>
                 </div>
                 <h1 class="hero-title">Я продам <span>твою квартиру!</span></h1>
-                <p class="hero-desc">Частный риелтор в г. Челябинск. Срочный выкуп квартир и комнат в любом состоянии. Реально решаю сложные задачи.</p>
+                <p class="hero-desc">Частный риелтор в&nbsp;г. Челябинск. Срочный выкуп квартир и&nbsp;комнат в&nbsp;любом состоянии. Реально решаю сложные задачи.</p>
                 
                 <a href="#contacts" class="hero-btn">
                     Заказать консультацию <i class="fa-solid fa-arrow-right"></i>
@@ -669,11 +848,11 @@
         <div class="container stats-grid">
             <div class="stat-item">
                 <h3>15+</h3>
-                <p>Лет на рынке</p>
+                <p>Лет на&nbsp;рынке</p>
             </div>
             <div class="stat-item">
                 <h3>24ч</h3>
-                <p>На оценку объекта</p>
+                <p>На&nbsp;оценку объекта</p>
             </div>
             <div class="stat-item">
                 <h3>100%</h3>
@@ -681,7 +860,7 @@
             </div>
             <div class="stat-item">
                 <h3>0₽</h3>
-                <p>За консультацию</p>
+                <p>За&nbsp;консультацию</p>
             </div>
         </div>
     </section>
@@ -691,10 +870,10 @@
         <div class="container">
             <div class="section-header">
                 <h2>Мои профильные услуги</h2>
-                <p>Решаю проблемы с недвижимостью быстро и конфиденциально.</p>
+                <p>Решаю проблемы с&nbsp;недвижимостью быстро и&nbsp;конфиденциально.</p>
             </div>
 
-            <div class="services-grid">
+            <div class="services-grid fade-in-up">
                 <!-- Выкуп -->
                 <div class="service-card">
                     <div class="service-img">
@@ -702,12 +881,12 @@
                     </div>
                     <div class="service-content">
                         <h3>Срочный выкуп квартир</h3>
-                        <p>Выкупаем квартиры и комнаты в Челябинске за счет собственных средств. Без долгих ожиданий покупателей.</p>
+                        <p>Выкупаем квартиры и&nbsp;комнаты в&nbsp;Челябинске за&nbsp;счет собственных средств. Без долгих ожиданий покупателей.</p>
                         <ul class="service-ul">
-                            <li><i class="fa-solid fa-check"></i> В любом состоянии</li>
-                            <li><i class="fa-solid fa-check"></i> С обременением банка</li>
-                            <li><i class="fa-solid fa-check"></i> С арестами и долгами</li>
-                            <li><i class="fa-solid fa-check"></i> С непогашенной ипотекой</li>
+                            <li><i class="fa-solid fa-check"></i> В&nbsp;любом состоянии</li>
+                            <li><i class="fa-solid fa-check"></i> С&nbsp;обременением банка</li>
+                            <li><i class="fa-solid fa-check"></i> С&nbsp;арестами и&nbsp;долгами</li>
+                            <li><i class="fa-solid fa-check"></i> С&nbsp;непогашенной ипотекой</li>
                         </ul>
                     </div>
                 </div>
@@ -715,15 +894,15 @@
                 <!-- Ипотека -->
                 <div class="service-card">
                     <div class="service-img">
-                        <img src="images/mortgage.jpg" alt="Помощь в оформлении ипотеки" loading="lazy">
+                        <img src="images/mortgage.jpg" alt="Помощь в&nbsp;оформлении ипотеки" loading="lazy">
                     </div>
                     <div class="service-content">
-                        <h3>Помощь с ипотекой</h3>
-                        <p>Комплексное сопровождение при получении ипотечного кредита. Помогаю получить одобрение даже в сложных случаях.</p>
+                        <h3>Помощь с&nbsp;ипотекой</h3>
+                        <p>Комплексное сопровождение при получении ипотечного кредита. Помогаю получить одобрение даже в&nbsp;сложных случаях.</p>
                         <ul class="service-ul">
-                            <li><i class="fa-solid fa-check"></i> Сниженные ставки от партнеров</li>
+                            <li><i class="fa-solid fa-check"></i> Сниженные ставки от&nbsp;партнеров</li>
                             <li><i class="fa-solid fa-check"></i> Без первоначального взноса</li>
-                            <li><i class="fa-solid fa-check"></i> Работаю с плохой кредитной историей</li>
+                            <li><i class="fa-solid fa-check"></i> Работаю с&nbsp;плохой кредитной историей</li>
                             <li><i class="fa-solid fa-check"></i> Полное оформление "под ключ"</li>
                         </ul>
                     </div>
@@ -734,7 +913,7 @@
 
     <!-- Contacts -->
     <section class="contact" id="contacts">
-        <div class="container contact-grid">
+        <div class="container contact-grid fade-in-up">
             <div class="contact-info">
                 <h2>Свяжитесь со мной</h2>
                 
@@ -764,15 +943,19 @@
                     </div>
                 </div>
 
-                <div class="socials">
-                    <a href="https://vk.com/gallery174" target="_blank"><i class="fa-brands fa-vk"></i></a>
-                    <a href="mailto:dinar-ac@mail.ru"><i class="fa-solid fa-envelope"></i></a>
+
+                <div class="socials" style="margin-bottom: 40px;">
+                    <a href="https://vk.com/gallery174" target="_blank" aria-label="ВКонтакте"><i class="fa-brands fa-vk"></i></a>
+                    <a href="mailto:dinar-ac@mail.ru" aria-label="Написать письмо"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+                <div style="border-radius: var(--radius); overflow: hidden; height: 300px;">
+                    <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A7a195b05a6abdb2de29e8590c6a58390b1c0a0c64ff71420ed6771d996168e21&amp;width=100%25&amp;height=300&amp;lang=ru_RU&amp;scroll=true"></script>
                 </div>
             </div>
 
             <div class="contact-form">
                 <h3>Оставьте заявку онлайн</h3>
-                <form onsubmit="event.preventDefault(); alert('Спасибо! Заявка отправлена, мы скоро свяжемся с вами.');">
+                <form onsubmit="event.preventDefault(); document.getElementById('successModal').classList.add('open');">
                     <div class="form-group">
                         <input type="text" placeholder="Ваше имя" required>
                     </div>
@@ -780,7 +963,7 @@
                         <input type="tel" placeholder="Номер телефона" required>
                     </div>
                     <div class="form-group">
-                        <textarea rows="4" placeholder="Кратко опишите вашу ситуацию (например: хочу срочно продать квартиру с долгами)"></textarea>
+                        <textarea rows="4" placeholder="Кратко опишите вашу ситуацию (например: хочу срочно продать квартиру с&nbsp;долгами)"></textarea>
                     </div>
                     <button type="submit" class="submit-btn">Отправить заявку</button>
                 </form>
@@ -790,14 +973,115 @@
 
     <!-- Online Chat Widget -->
     <div class="chat-widget">
-        <div class="chat-tooltip">Напишите нам онлайн! Мы в сети 🟢</div>
-        <button class="chat-btn" onclick="alert('Демо чат-виджета запущено! Здесь откроется окно переписки.')">
+        <div class="chat-tooltip">Напишите нам онлайн! Мы в&nbsp;сети 🟢</div>
+        <button class="chat-btn" onclick="document.getElementById('chatBox').classList.toggle('open')" aria-label="Открыть чат">
             <i class="fa-solid fa-comment-dots"></i>
         </button>
     </div>
 
     <!-- Scripts -->
+
+    <!-- Mobile Drawer -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <button class="drawer-close" id="drawerClose" aria-label="Закрыть меню"><i class="fa-solid fa-xmark"></i></button>
+        <a href="#services" class="drawer-link" style="font-size: 18px; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid rgba(128,128,128,0.2); padding-bottom: 15px;">Услуги</a>
+        <a href="#about" class="drawer-link" style="font-size: 18px; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid rgba(128,128,128,0.2); padding-bottom: 15px;">Преимущества</a>
+        <a href="#contacts" class="drawer-link" style="font-size: 18px; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid rgba(128,128,128,0.2); padding-bottom: 15px;">Контакты</a>
+        <a href="#contacts" class="header-btn drawer-link" style="text-align: center; margin-top: 20px;">Онлайн-оценка</a>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content" style="text-align: center;">
+            <button class="modal-close" onclick="document.getElementById('successModal').classList.remove('open')" aria-label="Закрыть"><i class="fa-solid fa-xmark"></i></button>
+            <i class="fa-solid fa-circle-check" style="font-size: 64px; color: #10B981; margin-bottom: 20px;"></i>
+            <h3 style="font-size: 24px; margin-bottom: 10px;">Заявка отправлена!</h3>
+            <p style="color: var(--text-muted);">Я свяжусь с&nbsp;вами в&nbsp;ближайшее время для уточнения деталей.</p>
+            <button class="header-btn" onclick="document.getElementById('successModal').classList.remove('open')" style="margin-top: 20px; border: none; cursor: pointer; width: 100%;">Понятно</button>
+        </div>
+    </div>
+
+    <!-- Chat Box -->
+    <div class="chat-box" id="chatBox">
+        <div class="chat-header">
+            <div>
+                <span style="display: block; font-size: 16px;">Динар Абдрафиков</span>
+                <span style="font-size: 12px; font-weight: normal;">Онлайн 🟢</span>
+            </div>
+            <button onclick="document.getElementById('chatBox').classList.remove('open')" aria-label="Закрыть чат" style="background: none; border: none; color: #000; font-size: 20px; cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="chat-msg">Здравствуйте! Готов проконсультировать вас по&nbsp;срочному выкупу вашей квартиры.</div>
+        </div>
+        <form class="chat-footer" onsubmit="event.preventDefault(); const inp = this.querySelector('input'); if(inp.value.trim()){ const b=document.getElementById('chatBody'); b.innerHTML += `<div class='chat-msg' style='background: var(--accent); color: #000; margin-left: auto;'>${inp.value}</div>`; inp.value=''; b.scrollTop=b.scrollHeight; }">
+            <input type="text" class="chat-input" placeholder="Введите сообщение..." required>
+            <button type="submit" class="chat-send" aria-label="Отправить"><i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+    </div>
+    
     <script>
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const root = document.documentElement;
+        
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            root.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = root.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            root.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        function updateThemeIcon(theme) {
+            const icon = themeToggle.querySelector('i');
+            if (theme === 'dark') {
+                icon.className = 'fa-solid fa-sun';
+            } else {
+                icon.className = 'fa-solid fa-moon';
+            }
+        }
+
+        // Mobile Drawer
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const drawerClose = document.getElementById('drawerClose');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        const drawerOverlay = document.getElementById('drawerOverlay');
+        const drawerLinks = document.querySelectorAll('.drawer-link');
+
+        function toggleDrawer() {
+            mobileDrawer.classList.toggle('open');
+            drawerOverlay.classList.toggle('open');
+        }
+
+        if(hamburgerBtn) hamburgerBtn.addEventListener('click', toggleDrawer);
+        if(drawerClose) drawerClose.addEventListener('click', toggleDrawer);
+        if(drawerOverlay) drawerOverlay.addEventListener('click', toggleDrawer);
+        drawerLinks.forEach(link => link.addEventListener('click', toggleDrawer));
+
+        // Intersection Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
         // Header scroll effect
         const header = document.getElementById('header');
         window.addEventListener('scroll', () => {
